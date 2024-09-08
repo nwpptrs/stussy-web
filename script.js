@@ -1,9 +1,11 @@
-ScrollReveal({
-  distance: "80px",
-  duration: 2000,
-  delay: 100,
+let showCart = document.querySelector(".Cart-all");
+let bodyDOM = document.querySelector("body");
+let closeCart = document.querySelector(".close");
+
+showCart.addEventListener("click", () => {
+  bodyDOM.classList.toggle("showCart");
 });
 
-ScrollReveal().reveal(".Show-NewItems-Container", { origin: "left" });
-ScrollReveal().reveal(".left", { origin: "left" });
-ScrollReveal().reveal(".right", { origin });
+closeCart.addEventListener("click", () => {
+  bodyDOM.classList.toggle("showCart");
+});
