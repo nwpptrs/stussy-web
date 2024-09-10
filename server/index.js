@@ -2,7 +2,9 @@ const express = require("express");
 const bodyparser = require("body-parser");
 const mysql = require("mysql2/promise");
 const app = express();
+const cors = require("cors");
 
+app.use(cors());
 app.use(bodyparser.json());
 const port = 8000;
 
@@ -16,26 +18,6 @@ const initmysql = async () => {
     database: "Product",
   });
 };
-
-// Post สำหรับสร้าง product ใหม่บันทึกเข้าไป
-app.post("/Product", async (req, res) => {
-  try {
-    let product = req.body;
-    const results = await conn.query(
-      "INSERT INTO product_detail SET ?",
-      product
-    );
-    res.json({
-      message: "insert ok",
-      data: results[0],
-    });
-  } catch (error) {
-    console.error("error message", error.message);
-    res.status(500).json({
-      message: "Somthing Wrong",
-    });
-  }
-});
 
 app.get("/Product", async (req, res) => {
   const results = await conn.query("SELECT * FROM product_detail");
@@ -63,29 +45,51 @@ app.get("/Product/:id", async (req, res) => {
   }
 });
 
-app.post("/user", (req, res) => {
-  let user = req.body;
-  user.id = counter;
-  counter += 1;
-
-  users.push(user);
-  res.json({
-    message: "add success",
-    user: user,
-  });
-});
-app.put("/user/:id", (req, res) => {
-  let id = req.params.id;
-  let selectedIndex = users.findIndex((user) => {
-    if (user.id == id) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-  res.send(selectedIndex + "");
-});
 app.listen(port, async (req, res) => {
   await initmysql();
   console.log("http server run at" + port);
 });
+
+// Post สำหรับสร้าง product ใหม่บันทึกเข้าไป
+// app.post("/Product", async (req, res) => {
+//   try {
+//     let product = req.body;
+//     const results = await conn.query(
+//       "INSERT INTO product_detail SET ?",
+//       product
+//     );
+//     res.json({
+//       message: "insert ok",
+//       data: results[0],
+//     });
+//   } catch (error) {
+//     console.error("error message", error.message);
+//     res.status(500).json({
+//       message: "Somthing Wrong",
+//     });
+//   }
+// });
+//รับ ข้อมูลจากตาราง product_detail ของ database เข้ามา
+
+// app.post("/user", (req, res) => {
+//   let user = req.body;
+//   user.id = counter;
+//   counter += 1;
+
+//   users.push(user);
+//   res.json({
+//     message: "add success",
+//     user: user,
+//   });
+// });
+// app.put("/user/:id", (req, res) => {
+//   let id = req.params.id;
+//   let selectedIndex = users.findIndex((user) => {
+//     if (user.id == id) {
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   });
+//   res.send(selectedIndex + "");
+// });
