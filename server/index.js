@@ -50,25 +50,26 @@ app.listen(port, async (req, res) => {
   console.log("http server run at" + port);
 });
 
-// Post สำหรับสร้าง product ใหม่บันทึกเข้าไป
-// app.post("/Product", async (req, res) => {
-//   try {
-//     let product = req.body;
-//     const results = await conn.query(
-//       "INSERT INTO product_detail SET ?",
-//       product
-//     );
-//     res.json({
-//       message: "insert ok",
-//       data: results[0],
-//     });
-//   } catch (error) {
-//     console.error("error message", error.message);
-//     res.status(500).json({
-//       message: "Somthing Wrong",
-//     });
-//   }
-// });
+//Post สำหรับสร้าง product ใหม่บันทึกเข้าไป
+app.post("/Product", async (req, res) => {
+  try {
+    let product = req.body;
+    const results = await conn.query(
+      "INSERT INTO product_detail SET ?",
+      product
+    );
+    res.json({
+      message: "insert ok",
+      data: results[0],
+    });
+  } catch (error) {
+    console.error("error message", error.message);
+    res.status(500).json({
+      message: "Somthing Wrong",
+    });
+  }
+});
+
 //รับ ข้อมูลจากตาราง product_detail ของ database เข้ามา
 
 // app.post("/user", (req, res) => {
