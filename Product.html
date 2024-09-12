@@ -21,10 +21,13 @@
         </div>
         <div class="menu">
           <div class="search">
-            <input type="text" name="search" id="" placeholder="ค้นหา" />
-            <button class="btn-find">
-              <i class="fa-solid fa-magnifying-glass find"></i>
-            </button>
+            <input
+              type="text"
+              name="search"
+              id="searchInput"
+              placeholder="ค้นหา"
+              oninput="searchProduct()"
+            />
           </div>
           <div class="Cart-all">
             <button>
@@ -51,7 +54,7 @@
           <!-- รายการสินค้าในตะกร้าจะแสดงที่นี่ -->
         </div>
         <div class="check-out">
-          <button>CHECK OUT</button>
+          <button id="checkout-show">CHECK OUT</button>
         </div>
       </div>
       <header class="fliter-bar">

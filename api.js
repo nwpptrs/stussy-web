@@ -1,23 +1,30 @@
 let products = [];
-
 let cart = [];
 
 window.onload = async () => {
   try {
     const response = await axios.get("http://localhost:8000/Product");
-
     products = response.data;
-
     filter("All");
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 };
 
-const displayProducts = (filteredProducts) => {
-  // หาตำแหน่งที่จะใส่ HTML ของสินค้า
-  const productDOM = document.querySelector(".Product-Container");
+//ค้นหา
+const searchProduct = () => {
+  const searchValue = document
+    .querySelector("#searchInput")
+    .value.toLowerCase(); // รับค่าจาก input และแปลงเป็นตัวพิมพ์เล็ก
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchValue)
+  ); // กรองสินค้าที่ชื่อตรงกับค่าที่พิมพ์
+  displayProducts(filteredProducts); // แสดงสินค้าที่กรองแล้ว
+};
 
+//แสดงสินค้าทั้งหมด หรือเปลี่ยนตาม para ที่รับเข้ามา
+const displayProducts = (filteredProducts) => {
+  const productDOM = document.querySelector(".Product-Container");
   let htmlData = "";
 
   filteredProducts.forEach((product) => {
@@ -40,6 +47,7 @@ const displayProducts = (filteredProducts) => {
   productDOM.innerHTML = htmlData;
 };
 
+//กรองตามที่เรากดรับ type มา
 const filter = (type) => {
   const filteredProducts =
     type === "All"
@@ -75,6 +83,7 @@ const addtoCart = (productId, showadd) => {
   updateCartNumber();
 };
 
+//อัพเดทของในตะกร้่า
 const updateCart = () => {
   const cartDOM = document.querySelector(".Cart-list-container");
 
@@ -109,6 +118,7 @@ const updateCart = () => {
   totalPriceDOM.textContent = totalPrice;
 };
 
+//เปลี่ยนเลขตามของที่อยู่ใน Array
 const updateCartNumber = () => {
   const cartNumberDOM = document.querySelector("#cartNumber");
 
@@ -122,6 +132,7 @@ const updateCartNumber = () => {
   }
 };
 
+//เพิ่มสินค้า
 const increaseQuantity = (index) => {
   cart[index].quantity += 1;
 
@@ -129,6 +140,7 @@ const increaseQuantity = (index) => {
   updateCartNumber();
 };
 
+//ลดสินค้า
 const decreaseQuantity = (index) => {
   if (cart[index].quantity > 1) {
     cart[index].quantity -= 1;
@@ -139,3 +151,10 @@ const decreaseQuantity = (index) => {
   updateCart();
   updateCartNumber();
 };
+
+document.getElementById("checkout-show").addEventListener("click", () => {
+  alert("ขอบคุณสำหรับการสั่งซื้อ");
+  cart = [];
+  updateCart();
+  updateCartNumber();
+});
