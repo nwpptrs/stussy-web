@@ -25,34 +25,40 @@ const searchProduct = () => {
 //แสดงสินค้าทั้งหมด หรือเปลี่ยนตาม para ที่รับเข้ามา
 const displayProducts = (filteredProducts) => {
   const productDOM = document.querySelector(".Product-Container");
+
   let htmlData = "";
-
-  filteredProducts.forEach((product) => {
-    htmlData += `<div class="Card" data-type="${product.type}">
-      <div class="show-img">
-        <img src="${product.img}" alt="Product" class="default-img" />
-        <img src="${product.img_hover}" alt="Hover" class="hover-img" />
-      </div>
-      <h3>${product.name}</h3>
-      <p>${product.price} ฿</p>
-      <div class="btn">
-        <p class="show-add">เพิ่มไปยังตะกร้าแล้ว</p>
-        <button onclick="addtoCart(${product.id}, this)">
-          <i class="fa-solid fa-cart-shopping"></i>
-        </button>
-      </div>
-    </div>`;
-  });
-
+  if (filteredProducts.length === 0) {
+    htmlData = `<div class="not-found">NOT FOUND</div>`;
+  } else {
+    filteredProducts.forEach((product) => {
+      htmlData += `<div class="Card" data-type="${product.type}">
+        <div class="show-img">
+          <img src="${product.img}" alt="Product" class="default-img" />
+          <img src="${product.img_hover}" alt="Hover" class="hover-img" />
+        </div>
+        <h3>${product.name}</h3>
+        <p>${product.price} ฿</p>
+        <div class="btn">
+          <p class="show-add">เพิ่มไปยังตะกร้าแล้ว</p>
+          <button onclick="addtoCart(${product.id}, this)">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </button>
+        </div>
+      </div>`;
+    });
+  }
   productDOM.innerHTML = htmlData;
 };
 
 //กรองตามที่เรากดรับ type มา
 const filter = (type) => {
-  const filteredProducts =
-    type === "All"
-      ? products
-      : products.filter((product) => product.type === type);
+  let filteredProducts;
+
+  if (type === "All") {
+    filteredProducts = products;
+  } else {
+    filteredProducts = products.filter((product) => product.type === type);
+  }
 
   displayProducts(filteredProducts);
 };
@@ -68,7 +74,6 @@ const addtoCart = (productId, showadd) => {
   }
 
   const product = products.find((p) => p.id === productId);
-
   if (!product) return;
 
   const productInCart = cart.find((item) => item.id === productId);
@@ -86,11 +91,9 @@ const addtoCart = (productId, showadd) => {
 //อัพเดทของในตะกร้่า
 const updateCart = () => {
   const cartDOM = document.querySelector(".Cart-list-container");
-
   const totalPriceDOM = document.querySelector("#totalPrice");
 
   let cartHTML = "";
-
   let totalPrice = 0;
 
   cart.forEach((product, index) => {
@@ -114,14 +117,12 @@ const updateCart = () => {
   });
 
   cartDOM.innerHTML = cartHTML;
-
   totalPriceDOM.textContent = totalPrice;
 };
 
 //เปลี่ยนเลขตามของที่อยู่ใน Array
 const updateCartNumber = () => {
   const cartNumberDOM = document.querySelector("#cartNumber");
-
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   if (totalItems > 0) {
@@ -151,10 +152,3 @@ const decreaseQuantity = (index) => {
   updateCart();
   updateCartNumber();
 };
-
-document.getElementById("checkout-show").addEventListener("click", () => {
-  alert("ขอบคุณสำหรับการสั่งซื้อ");
-  cart = [];
-  updateCart();
-  updateCartNumber();
-});

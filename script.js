@@ -9,3 +9,10 @@ showCart.addEventListener("click", () => {
 closeCart.addEventListener("click", () => {
   bodyDOM.classList.toggle("showCart");
 });
+
+document.getElementById("checkout-show").addEventListener("click", () => {
+  alert("ขอบคุณสำหรับการสั่งซื้อ");
+  cart = [];
+  updateCart();
+  updateCartNumber();
+});
