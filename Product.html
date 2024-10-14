@@ -38,12 +38,17 @@
             </button>
             <div class="Cart-number" id="cartNumber">0</div>
           </div>
+          <div style="margin-left: 20px;">
+            <a style="color: black;"  href="Order.html"
+              >ประวัติการสั่งซื้อ</a
+            >
+          </div>
         </div>
       </div>
       <div class="Cart-tab" id="cartTab">
         <div class="Cart-Head">
           <h2>My Cart</h2>
-          <h3>ราคารวมทั้งหมด : <span id="totalPrice">0</span>฿</h3>
+          <h3>ราคารวมทั้งหมด : <span id="totalPrice">0</span>&nbsp฿</h3>
           <div class="close">
             <button>X</button>
           </div>
@@ -51,10 +56,11 @@
         <div class="Cart-list-container">
           <!-- รายการสินค้าในตะกร้าจะแสดงที่นี่ -->
         </div>
-        <div class="check-out">
-          <button id="checkout-show">CHECK OUT</button>
-        </div>
+        <button class="check-out">
+          <a href="checkout.html" id="checkout-show">ชำระเงิน</a>
+        </button>
       </div>
+
       <header class="fliter-bar">
         <div class="fliter-bar-container">
           <ul>

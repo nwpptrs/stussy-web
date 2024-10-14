@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.13/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="container mx-auto mt-10 p-5">
+    <h1 class="text-2xl font-bold mb-5">รายการสั่งซื้อทั้งหมด</h1>
+    <div id="orderList" class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <!-- รายการคำสั่งซื้อจะแสดงที่นี่ -->
+    </div>
+
+    <div class="text-center mt-5">
+      <button onclick="goToProductPage()" class="btn btn-neutral">
+        กลับไปหน้าสั่งซื้อ
+      </button>
+    </div>
+  </div>
+
+  <!-- Import Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="Order.js"></script>
+</body>
+</html>

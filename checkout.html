@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link
+    href="https://cdn.jsdelivr.net/npm/daisyui@4.12.13/dist/full.min.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="hero bg-base-200 min-h-screen">
+    <div class="card bg-base-100 w-1/2 shadow-2xl">
+      <form class="card-body" id="checkoutForm">
+        <div>
+          <button type="button" onclick="goBackToProduct()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+              width="20px"
+            >
+              <path
+                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">ชื่อผู้รับ</span>
+          </label>
+          <input
+            type="text"
+            id="customerName"
+            placeholder="ชื่อ-นามสกุล"
+            class="input input-bordered"
+            required
+          />
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">เบอร์มือถือ</span>
+          </label>
+          <input
+            type="text"
+            id="customerPhone"
+            placeholder="หมายเลขเบอร์มือถือ"
+            class="input input-bordered"
+            required
+          />
+        </div>
+        <div class="form-control mb-5">
+          <label class="label">
+            <span class="label-text">ที่อยู่</span>
+          </label>
+          <textarea
+            id="customerAddress"
+            class="textarea textarea-bordered"
+            placeholder="ที่อยู่"
+            required
+          ></textarea>
+        </div>
+        <div class="text-center">
+          <div class="flex justify-center w-full">
+            <div>ยอดชำระทั้งหมด :&nbsp</div>
+            <div id="totalPrice" class="font-black text-lg">0฿</div>
+            <span class="font-black text-lg">&nbsp฿</span>
+          </div>
+          <div
+            class="flex flex-col text-center border-solid border-2 border-black rounded-md"
+          >
+            <div class="font-bold">ช่องทางการชำระเงิน</div>
+            <div>ธนาคาร : กรุงไทย</div>
+            <div>ชื่อบัญชี : นาย นวพล พุทธรักษา</div>
+            <div>เลขบัญชี : 1234567890</div>
+          </div>
+        </div>
+        <div class="form-control">
+          <div class="text-center mt-4">
+            <input
+              type="file"
+              id="paymentFile"
+              class="file-input file-input-bordered w-full max-w-xs"
+            />
+          </div>
+        </div>
+        <div id="paymentStatus" class="text-center mt-4"></div>
+        <div class="form-control mt-6">
+          <button type="button" id="checkoutButton" class="btn btn-neutral" disabled>
+            สั่งซื้อ
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+    <script src="checkout.js"></script>
+  </body>
+</html>
